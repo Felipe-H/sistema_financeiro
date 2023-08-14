@@ -15,25 +15,28 @@
 
     <!-- Styles -->
     <style>
-    .container {
-        margin: 0;
-        padding: 0;
-    }
-    .main {
-        background-color: black;
-        color: #fff;
-        height: auto;
-        width: 270px;
-        padding: 20px;
-        border-radius: 10px;
-        text-align: center;
-    }
+        * {
+            margin: 0;
+            padding: 0;
+        }
 
-    .btn {
-        height: auto;
-        width: 40px;
+        .main {
+            background-color: black;
+            color: #fff;
+            height: auto;
+            width: 270px;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            margin: auto;
 
-    }
+        }
+
+        .btn {
+            height: auto;
+            margin: 6px;
+            width: 40px;
+        }
 
     </style>
 </head>
@@ -67,34 +70,70 @@
     <div class="row">
         <div class="col-md-12">
             <form action="#" name="calculadora" class="main">
-                <input type="text" class="display form-control" name="display"> <br>
-
-                <input type="button" class="btn btn-primary" value="C">
-                <input type="button" class="btn btn-primary ml-3" value="->">
-                <input type="button" class="btn btn-primary ml-3" value="%">
-                <input type="button" class="btn btn-primary ml-3" value="/"><br><br>
-                <input type="button" class="btn btn-primary" value="7">
-                <input type="button" class="btn btn-primary ml-3" value="8">
-                <input type="button" class="btn btn-primary ml-3" value="9">
-                <input type="button" class="btn btn-primary ml-3" value="*"><br><br>
-                <input type="button" class="btn btn-primary" value="6">
-                <input type="button" class="btn btn-primary ml-3" value="5">
-                <input type="button" class="btn btn-primary ml-3" value="4">
-                <input type="button" class="btn btn-primary ml-3" value="-"><br><br>
-                <input type="button" class="btn btn-primary" value="3">
-                <input type="button" class="btn btn-primary ml-3" value="2">
-                <input type="button" class="btn btn-primary ml-3" value="1">
-                <input type="button" class="btn btn-primary ml-3" value="+"><br><br>
-                <input type="button" class="btn btn-primary" value="0">
-                <input type="button" class="btn btn-primary ml-3" value="00">
-                <input type="button" class="btn btn-primary ml-3" value=".">
-                <input type="button" class="btn btn-primary ml-3" value="=">
+                {{--primeiro input que seta o campo texto que entram os numeros--}}
+                <input type="text" class="display form-control" id="display"> <br>
+                {{--inputs do tipo botao para setar os numeros--}}
+                <input type="button" class="btn btn-primary" id="clear" value="C">
+                <input type="button" class="btn btn-primary ml-3" value="<-" onclick="backspace()">
+                <input type="button" class="btn btn-primary ml-3" value="%" onclick="addToDisplay('%')">
+                <input type="button" class="btn btn-primary ml-3" value="/" onclick="addToDisplay('/')" ><br><br>
+                <input type="button" class="btn btn-primary" value="7" onclick="seven()">
+                <input type="button" class="btn btn-primary ml-3" value="8" onclick="eight()">
+                <input type="button" class="btn btn-primary ml-3" value="9" onclick="nine()">
+                <input type="button" class="btn btn-primary ml-3" value="*" onclick="addToDisplay('*')"><br><br>
+                <input type="button" class="btn btn-primary" value="6" onclick="six()">
+                <input type="button" class="btn btn-primary ml-3" value="5" onclick="seven()">
+                <input type="button" class="btn btn-primary ml-3" value="4" onclick="four()">
+                <input type="button" class="btn btn-primary ml-3" value="-" onclick="addToDisplay('-')"><br><br>
+                <input type="button" class="btn btn-primary" value="3" onclick="three()">
+                <input type="button" class="btn btn-primary ml-3" value="2" onclick="two()">
+                <input type="button" class="btn btn-primary ml-3" value="1" onclick="one()">
+                <input type="button" class="btn btn-primary ml-3" value="+" onclick="addToDisplay('+')"><br><br>
+                <input type="button" class="btn btn-primary" value="0" onclick="zero()">
+                <input type="button" class="btn btn-primary ml-3" value="00" onclick="addToDisplay('00')">
+                <input type="button" class="btn btn-primary ml-3" value="." onclick="point()">
+                <input type="button" class="btn btn-primary ml-3" value="=" id="equals">
             </form>
         </div>
     </div>
 </div>
 
 <script>
+    //botao limpeza
+    document.querySelector("#clear").addEventListener("click", () => {
+        document.querySelector("#display").value = " ";
+    })
+
+    //funcao de voltar
+    const backspace = () =>{
+        const num = document.querySelector("#display").value.slice(0, -1);
+        document.querySelector("#display").value = num;
+    }
+    function addToDisplay(char) {
+        const display = document.getElementById('display');
+        display.value += char;
+    }
+    document.querySelector("#equals").addEventListener("click", () => {
+        const displayValue = document.querySelector("#display").value;
+
+        try {
+            const result = eval(displayValue);
+            document.querySelector("#display").value = result;
+        } catch (error) {
+            // Lidar com erros de cálculo inválidos, se necessário
+            console.error("Erro ao calcular:", error);
+        }
+    });
+
+    const one = () => {
+        if(document.querySelector("#display").value === " ") {
+            document.querySelector("#display").value = "1";
+        }
+        else {
+            document.querySelector("#display").value = document.querySelector("#display").value + "1"
+        }
+    }
+
 
     document.addEventListener('DOMContentLoaded', function () {
         var openNotesBtn = document.getElementById('open-notes-btn');
