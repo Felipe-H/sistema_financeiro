@@ -28,7 +28,7 @@
     </div>
     <script>
         function redirectToSystem() {
-            window.location.href = "{{ route('') }}";
+            window.location.href = "{{ route('sistemaprincipal') }}";
         }
     </script>
     </body>

@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('comeco');
 
 Route::get('/sistemaprincipal', function () {
     return view('sistema');
@@ -23,8 +23,20 @@ Route::get('/sistemaprincipal', function () {
 
 Route::get('/geradorPlanilha', function () {
     return view('geradorxlsx');
-});
+})->name('geradorxlsx');
 
 Route::get('/calculadora', function () {
     return view('calculadora');
 })->name('calculadora');
+
+Route::get('/processar-registro', function () {
+    return view('processar_registro');
+})->name('processar.registro');
+
+Route::get('/processar-recebimento', function () {
+    return view('processar_recebimento');
+})->name('processar.recebimento');
+
+Route::get('/login', function () {
+    return view('login');
+})->name('tela-de-login');
