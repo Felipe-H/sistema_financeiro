@@ -7,6 +7,12 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
+<style>
+    h1 {
+        display: flex;
+        justify-content: center;
+    }
+</style>
 <body class="antialiased">
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <a class="navbar-brand" href="{{ route('comeco') }}">Sistema Financeiro</a>
@@ -26,11 +32,24 @@
             </li>
         </ul>
     </div>
-
 </nav>
-
-<!-- Resto do conteúdo da página -->
-
-<!-- Inclua os links para os scripts do Bootstrap e outros scripts se necessário -->
+<br>
+<div class="container">
+    <div class="form-group">
+        <form action="{{ route('processar.registro') }}" method="POST">
+        <h2>Entrada de capitais</h2>
+        <label class="col-md-4 control-label">Descrição</label>
+        <div class="col-md-10 inputGroupContainer">
+            <div class="input-group">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                <input  name="Descricao" placeholder="Descricao capital" class="form-control"  type="text">
+                <input name="valor_divida" placeholder="Valor da Dívida" class="form-control" type="text">
+                <input name="data" placeholder="Data" class="form-control" type="date">
+                <button type="submit" class="btn btn-primary ml-1">Registrar</button>
+            </div>
+        </div>
+            </form>
+    </div>
+</div>
 </body>
 </html>
